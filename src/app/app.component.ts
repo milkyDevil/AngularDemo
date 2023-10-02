@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+declare const FEATURE_FLAG: string;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angulardemo';
+  featureFlag = '';
+
+  constructor(){
+    this.featureFlag = FEATURE_FLAG
+    console.log("this.featureFlag",this.featureFlag)
+  }
 }
