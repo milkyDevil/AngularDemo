@@ -1,9 +1,184 @@
-@import '/src/assets/styles/globalVariables.scss';
+@import "/src/assets/styles/globalVariables.scss";
 
-.container {
-  height: 100vh;
+ul.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 1rem;
+  list-style: none;
+
+  li.nav-item {
+    flex: 0 0 auto;
+
+    button {
+      white-space: nowrap;
+      background-color: $faint-grey;
+      border: 1px solid transparent;
+      width: -webkit-fill-available; // Added semicolon here
+      color: $body-alt;
+      &.active {
+        background-color: $purple-2;
+        border-color: $purple-2;
+        color: $body;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    // Styles for screens with a maximum width of 767px (typical mobile devices)
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+    li.nav-item {
+      flex: 1 1 100%;
+    }
+  }
+
+  // Scrollbar styling for WebKit browsers
+  &::-webkit-scrollbar {
+    width: 6px; // Adjust the width as needed
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 }
 
-._tabs {
-  background-color: $purple-2;
+.card-container {
+  .subtle {
+    color: #aaa;
+  }
+
+  .card-container {
+    margin: 25px auto 0;
+    position: relative;
+    width: 692px;
+  }
+
+  .card {
+    background-color: #fff;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 5px rgba(75, 75, 75, 0.07);
+    z-index: 1;
+  }
+
+  .card-body {
+    display: inline-block;
+    // width: 310px;
+  }
+
+  .main-part{
+    position: relative;
+  }
+
+  .card-number-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+  }
+  .card-number-wrapper, .card-author, .card-title{
+    position: relative;
+    z-index: 1;
+  }
+  .recipe-cover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: clip;
+    img{
+      width: 100%;
+    }
+  }
+
+  .card-number {
+    margin-top: 15px;
+    right: 0;
+  }
+
+  .card-circle {
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 22px;
+    font-size: 12px;
+    height: 25px;
+    text-align: center;
+    width: 25px;
+  }
+
+  .card-author {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin: 15px 0 0;
+    text-transform: uppercase;
+    padding-left: 10px;
+  }
+
+  .card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 30px;
+    font-weight: 300;
+    // line-height: 60px;
+    margin: 10px 0;
+    padding: 10px;
+    color: $purple-2;
+    text-shadow: 0px 0px 4px black;
+  }
+
+  .card-description {
+    display: inline-block;
+    font-weight: 300;
+    line-height: 22px;
+    margin: 10px 0;
+  }
+
+  .card-read {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    margin: 5px 0 20px;
+    position: relative;
+    text-align: right;
+    text-transform: uppercase;
+
+    &:after {
+      background-color: #b8bddd;
+      content: "";
+      display: block;
+      height: 1px;
+      position: absolute;
+      top: 9px;
+      width: 75%;
+    }
+  }
+
+  .card-tag {
+    float: right;
+    margin: 5px 0 0;
+  }
+
+  .card-media {
+    float: right;
+  }
+
+  .card-shadow {
+    background-color: #fff;
+    box-shadow: 0 2px 25px 2px rgba(0, 0, 0, 1), 0 2px 50px 2px rgba(0, 0, 0, 1),
+      0 0 100px 3px rgba(0, 0, 0, 0.25);
+    height: 1px;
+    margin: -1px auto 0;
+    width: 80%;
+    z-index: -1;
+  }
 }

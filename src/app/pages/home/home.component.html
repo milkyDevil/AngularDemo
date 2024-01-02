@@ -1,40 +1,51 @@
-<div class="container max-2xl auto">
-  <header class="d-flex justify-content-between align-items-center py-3">
-    <button class="border-0 bg-transparent">
-      <span class="bi bi-list fs-3"></span>
-    </button>
-    <button class="border-0 bg-transparent">
-      <span class="bi bi-person fs-3"></span>
-    </button>
-  </header>
-  <div>
-    <ul class="nav nav-tabs flex-nowrap nav-scrollable gap-2">
-      <li class="nav-item">
-        <button class="nav-link active btn btn-secondary">Chicken</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link btn btn-secondary">Mutton</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link btn btn-secondary">Veg</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link btn btn-secondary">Sweet</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link btn btn-secondary">Salty</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link btn btn-secondary">Soup</button>
-      </li>
-    </ul>
+<app-header></app-header>
+<ul class="nav nav-tabs flex-nowrap nav-scrollable gap-2">
+  <li class="nav-item">
+    <button class="nav-link active btn btn-secondary">Chicken</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-secondary">Mutton</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-secondary">Veg</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-secondary">Sweet</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-secondary">Salty</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-secondary">Soup</button>
+  </li>
+</ul>
 
-    <p>hi</p>
-    <!-- Add your content here -->
+<div class="recipe-container">
+  <div class="card-container">
+    <div class="card u-clearfix">
+      <div class="card-body">
+        <div class="main-part">
+          <div class="card-number-wrapper">
+            <span class="card-number card-circle subtle">01</span>
+          </div>
+          <span class="card-author subtle">John Smith</span>
+          <h2 class="card-title">New Brunch Recipe</h2>
+          <div class="recipe-cover-image"><img
+            src="https://s15.postimg.cc/temvv7u4r/recipe.jpg"
+            alt=""
+            class="card-media"
+          /></div>
+        </div>
+        <span class="card-description subtle"
+          >These last few weeks I have been working hard on a new brunch recipe
+          for you all.</span
+        >
+        <div class="card-read">Read</div>
+        <span class="card-tag card-circle subtle">C</span>
+      </div>
+    </div>
+    <div class="card-shadow"></div>
   </div>
-  <footer
-    class="fixed-bottom bg-light p-3 d-flex justify-content-center align-items-center"
-  >
-    <span class="bi bi-house fs-3"></span>
-  </footer>
 </div>
+<!-- Add your content here -->
+<app-footer></app-footer>

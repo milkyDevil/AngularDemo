@@ -1,0 +1,23 @@
+   header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+  
+    button {
+      border: 0;
+      background-color: transparent;
+    }
+  
+    .bi {
+      font-size: 1.5rem; // Adjust the font size as needed
+    }
+  
+    @media (max-width: 767px) {
+      // Styles for screens with a maximum width of 767px (typical mobile devices)
+      .bi {
+        font-size: 1.2rem; // Adjust the font size for smaller screens
+      }
+    }
+  }
+  

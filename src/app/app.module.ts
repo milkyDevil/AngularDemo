@@ -7,13 +7,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GetstartedComponent } from './pages/getstarted/getstarted.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    GetstartedComponent
+    GetstartedComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

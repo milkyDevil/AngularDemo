@@ -1,0 +1,24 @@
+footer {
+    &.fixed-bottom {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: lightgray;
+  
+    .bi {
+      font-size: 3rem; // Adjust the font size as needed
+    }
+  
+    @media (max-width: 767px) {
+      // Styles for screens with a maximum width of 767px (typical mobile devices)
+      .bi {
+        font-size: 2rem; // Adjust the font size for smaller screens
+      }
+    }
+  }
