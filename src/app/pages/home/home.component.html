@@ -1,55 +1,60 @@
 <app-header></app-header>
 
 <div class="mainContainer">
-    <div class="nav nav-tabs flex-nowrap nav-scrollable gap-2">
-      <div class="nav-item">
-        <button class="nav-link active btn btn-secondary">Chicken</button>
-      </div>
-      <div class="nav-item">
-        <button class="nav-link btn btn-secondary">Mutton</button>
-      </div>
-      <div class="nav-item">
-        <button class="nav-link btn btn-secondary">Veg</button>
-      </div>
-      <div class="nav-item">
-        <button class="nav-link btn btn-secondary">Sweet</button>
-      </div>
-      <div class="nav-item">
-        <button class="nav-link btn btn-secondary">Salty</button>
-      </div>
-      <div class="nav-item">
-        <button class="nav-link btn btn-secondary">Soup</button>
-      </div>
+  <div class="nav nav-tabs flex-nowrap nav-scrollable gap-2">
+    <div class="nav-item">
+      <button class="nav-link active btn btn-secondary">Chicken</button>
     </div>
-  <div class="recipe-container">
-    <div class="card-container">
-      <div class="card u-clearfix">
-        <div class="card-body">
-          <div class="main-part">
-            <div class="card-number-wrapper">
-              <span class="card-number card-circle subtle">01</span>
-            </div>
-
-            <div class="recipe-cover-image">
-              <img
-                src="https://s15.postimg.cc/temvv7u4r/recipe.jpg"
-                alt=""
-                class="card-media"
-              />
-              <h2 class="card-title">New Brunch Recipe</h2>
-            </div>
-            <!-- https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg -->
-          </div>
-          <span class="card-description subtle"
-            >These last few weeks I have been working hard on a new brunch
-            recipe for you all.</span
-          >
-          <div class="card-read">Read</div>
-        </div>
-      </div>
-      <div class="card-shadow"></div>
+    <div class="nav-item">
+      <button class="nav-link btn btn-secondary">Mutton</button>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link btn btn-secondary">Veg</button>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link btn btn-secondary">Sweet</button>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link btn btn-secondary">Salty</button>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link btn btn-secondary">Soup</button>
     </div>
   </div>
+
+  <div class="recipe-container">
+    <ng-container *ngIf="AllRecipes.length > 0; else noRecipes">
+      <div class="card-container" *ngFor="let recipe of AllRecipes">
+        <div class="card u-clearfix">
+          <div class="card-body">
+            <div class="main-part">
+              <div class="card-number-wrapper">
+                <span class="card-number card-circle subtle">{{ recipe.RecipeNumber }}</span>
+              </div>
+
+              <div class="recipe-cover-image">
+                <img
+                  [src]="recipe.RecipeImage ? recipe.RecipeImage : DummyImagePath"
+                  alt="{{ recipe.RecipeTitle }}"
+                  class="card-media"
+                />
+                <h2 class="card-title">{{ recipe.RecipeTitle }}</h2>
+              </div>
+            </div>
+            <span class="card-description subtle">{{
+              recipe.RecipeDescription
+            }}</span>
+            <div class="card-read">Read</div>
+          </div>
+        </div>
+        <div class="card-shadow"></div>
+      </div>
+    </ng-container>
+    <ng-template #noRecipes>
+      <div>add empty template here</div>
+    </ng-template>
+  </div>
 </div>
+
 <!-- Add your content here -->
 <app-footer></app-footer>

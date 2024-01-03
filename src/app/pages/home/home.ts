@@ -1,6 +1,6 @@
-export interface ResumeSelfInfo {
-    FullName: string;
-    EmailId: string;
-    PhoneNumber: string;
-    Address: string;
-  }
+export interface RecipeObject {
+  RecipeNumber: string;
+  RecipeTitle: string;
+  RecipeImage: string;
+  RecipeDescription: string;
+}
