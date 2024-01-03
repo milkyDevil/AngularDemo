@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeObject } from './home';
-import DummyBannerImage from 'src/assets/DummyRecipeImage.svg';
+//import DummyBannerImage from 'src/assets/images/DummyRecipeImage.svg';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import DummyBannerImage from 'src/assets/DummyRecipeImage.svg';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  DummyImagePath = DummyBannerImage;
+  DummyImagePath = 'https://s15.postimg.cc/temvv7u4r/recipe.jpg';
   AllRecipes: RecipeObject[] = [
     {
       RecipeNumber: '01',
