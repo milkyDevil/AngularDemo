@@ -1,23 +1,30 @@
-   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-  
-    button {
-      border: 0;
-      background-color: transparent;
-    }
-  
+@import "/src/assets/styles/globalVariables.scss";
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: $body; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+
+  button {
+    border: 0;
+    background-color: transparent;
+  }
+
+  .bi {
+    font-size: 1.5rem; // Adjust the font size as needed
+  }
+
+  @media (max-width: 767px) {
+    // Styles for screens with a maximum width of 767px (typical mobile devices)
     .bi {
-      font-size: 1.5rem; // Adjust the font size as needed
-    }
-  
-    @media (max-width: 767px) {
-      // Styles for screens with a maximum width of 767px (typical mobile devices)
-      .bi {
-        font-size: 1.2rem; // Adjust the font size for smaller screens
-      }
+      font-size: 1.2rem; // Adjust the font size for smaller screens
     }
   }
-  
+}
