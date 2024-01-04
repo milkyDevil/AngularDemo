@@ -1,0 +1,66 @@
+@import "/src/assets/styles/globalVariables.scss";
+.mainContainer {
+  margin-top: 70px;
+  height: 100vh;
+  background-color: $purple-1;
+}
+.mainIntroduction {
+  display: flex;
+  max-width: 896px;
+  margin: auto;
+  flex-direction: column;
+  padding-left: 30px;
+  justify-content: space-between;
+  .titleRecipe {
+    padding: 3%;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: $body;
+  }
+  .addInfoRecipe {
+    display: flex;
+    flex-direction: row;
+    .Info {
+      display: flex;
+      flex-direction: column;
+      margin: 1% 3%;
+      font-size: 20px;
+      gap: 10px;
+      justify-content: center;
+      width: 70%;
+      .Infotext {
+        margin-left: 10px;
+      }
+    }
+  }
+  .recipeImage {
+    overflow: hidden;
+  }
+}
+.bottomPart {
+  display: flex;
+  max-width: 896px;
+  margin: auto;
+  background-color: $body;
+  margin: 10px 0px;
+  height: 100%;
+  flex-direction: column;
+  .line {
+    width: 200px;
+    margin: 20px auto;
+    color: $purple-1;
+  }
+  .active{
+    color: $purple-2;
+  }
+  .activeTabContent{
+    border: 1px solid #ccc;
+    margin: 10px 30px;
+  }
+  .tabs{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
