@@ -4,6 +4,12 @@
   height: 100vh;
   background-color: $purple-1;
 }
+.subtle {
+  color: $subtle-grey;
+}
+.lightGrey{
+  color: $light-grey;
+}
 .mainIntroduction {
   display: flex;
   max-width: 896px;
@@ -11,6 +17,7 @@
   flex-direction: column;
   padding-left: 30px;
   justify-content: space-between;
+  padding-bottom: 40px;
   .titleRecipe {
     padding: 3%;
     font-weight: 700;
@@ -43,7 +50,6 @@
   max-width: 896px;
   margin: auto;
   background-color: $body;
-  margin: 10px 0px;
   height: 100%;
   flex-direction: column;
   .line {
@@ -56,11 +62,38 @@
   }
   .activeTabContent{
     border: 1px solid #ccc;
-    margin: 10px 30px;
+    margin: 10px;
   }
   .tabs{
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: 500;
   }
+  .list-group-custom{
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    font-weight: 500;
+  }
+  .list-group-custom-direction {
+    border: none;
+    text-align: justify;
+
+    li {
+        position: relative;
+        border: none;
+
+        span.bullet {
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 10px; 
+            height: 10px; 
+            background-color: $purple-1; 
+            border-radius: 50%;
+        }
+        .description{
+            margin-left: 10px;
+        }
+    }
+}
+
 }

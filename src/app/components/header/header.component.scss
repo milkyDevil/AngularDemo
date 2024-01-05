@@ -18,13 +18,21 @@ header {
   }
 
   .bi {
-    font-size: 1.5rem; // Adjust the font size as needed
+    font-size: 1.5rem; 
   }
 
   @media (max-width: 767px) {
-    // Styles for screens with a maximum width of 767px (typical mobile devices)
     .bi {
-      font-size: 1.2rem; // Adjust the font size for smaller screens
+      font-size: 1.2rem; 
     }
   }
+}
+.left-navigation{
+  width: 200px;
+  height: 102vh;
+  background-color: #000000f2;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
 }

@@ -1,8 +1,13 @@
 <header class="d-flex justify-content-between align-items-center py-3">
-  <button class="border-0 bg-transparent">
+  <button class="border-0 bg-transparent" (click)="setSideBar(true)">
     <span class="bi bi-list fs-3"></span>
   </button>
   <button class="border-0 bg-transparent">
     <span class="bi bi-person fs-3"></span>
   </button>
+  <ng-container *ngIf="ShowSideBar">
+    <div class="left-navigation">
+      <div (click)="setSideBar(false)">close</div>
+    </div>
+  </ng-container>
 </header>
