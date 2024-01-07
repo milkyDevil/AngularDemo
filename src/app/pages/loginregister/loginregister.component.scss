@@ -1,12 +1,13 @@
 @import "/src/assets/styles/globalVariables.scss";
 .mainContainer {
   height: 100vh;
-  background-color: $purple-1;
+  background-color: $body;
   .welcomt-text {
     color: $body-alt;
     padding: 20px 10px;
     font-weight: 500;
     margin: 0 auto;
+    color: $purple-2;
   }
   .form-part {
     background-color: #ffffff;
@@ -50,23 +51,32 @@
   flex-direction: column;
   gap: 15px;
   margin: auto;
+  color: $purple-2;
 }
 .title-login-register {
   text-align: center;
   margin: 10px 0px;
   font-weight: 500;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  color: $headings;
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 .forgot-pssword {
   text-align: center;
   margin: 15px 0px;
+  color: $purple-2;
 }
 .btnColor {
   background-color: $purple-2;
   color: $body;
+  padding: 10px 30px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 .btnColorLast {
-  color: $body;
+  color: $headings;
+  font-weight: 500;
   font-weight: 500;
 }
 .main-content {
@@ -75,4 +85,18 @@
   height: 63vh;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
+.col-12 {
+  input.custom-input {
+    border-color: $purple-1;
+
+    &::placeholder {
+      color: $purple-1;
+      font-size: 14px;
+    }
+
+    &:focus {
+      border-color: $purple-2;
+    }
+  }
 }
