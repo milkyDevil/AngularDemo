@@ -99,7 +99,7 @@
   }
 
   .card-circle {
-    border: 1px solid #aaa;
+    border: 1px solid $headings;
     border-radius: 50%;
     display: inline-block;
     line-height: 22px;
@@ -107,6 +107,8 @@
     height: 25px;
     text-align: center;
     width: 25px;
+    background-color: $body;
+    color: $headings;
   }
 
   .card-author {
@@ -125,16 +127,21 @@
     letter-spacing: 4px;
     z-index: 1;
     bottom: 3%;
-    left: 3%;
-    color: $body;
-    text-shadow: 0px 0px 2px $purple-2;
+    left: 2px;
+    color: $headings;
+    background-color: $body;
   }
 
   .card-description {
-    display: inline-block;
     font-weight: 300;
     line-height: 22px;
     margin: 10px 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    height: 2.5em;
   }
 
   .card-read {
@@ -145,9 +152,10 @@
     position: relative;
     text-align: right;
     text-transform: uppercase;
+    color: $headings;
 
     &:after {
-      background-color: #b8bddd;
+      background-color: $purple-1;
       content: "";
       display: block;
       height: 1px;
