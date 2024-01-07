@@ -62,7 +62,7 @@
     <button type="button" class="btn btnColor">{{ActiveTab}}</button>
     <div>
       
-      {{ActiveTab === 'Login' ? 'Already have an account?' : "Don't have an account?"}}
+      {{ActiveTab === 'Register' ? 'Already have an account?' : "Don't have an account?"}}
       <button type="button" class="btn btnColorLast" (click)="setActiveTab(ActiveTab === 'Login' ? 'Register' : 'Login')">{{ActiveTab === 'Login' ? 'Register' : 'Login'}}</button>
     </div>
   </div>
