@@ -11,7 +11,7 @@ export class RecipeComponent {
   PreparationTime: string = '32 MIN';
   ServingCount: string = '2';
   CalorieCount: string = '23';
-  RecipeImageUrl: string = 'https://s15.postimg.cc/temvv7u4r/recipe.jpg';
+  RecipeImageUrl: string = 'assets/images/UploadPreviewImage.png';
   ActiveTab = 'Direction';
   RecipeIngredients: IRecipeIngredients[] = [
     {

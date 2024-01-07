@@ -1,75 +1,78 @@
 @import "/src/assets/styles/globalVariables.scss";
 .mainContainer {
-  margin-top: 70px;
   height: 100vh;
-  background-color: $purple-1;
+  background-color: $body;
+}
+.mainDiv {
+  margin-top: 70px;
+  padding-bottom: 70px;
 }
 .subtle {
   color: $subtle-grey;
 }
-.lightGrey{
+.lightGrey {
   color: $light-grey;
 }
-.mainIntroduction {
+.top-detail-part {
   display: flex;
   max-width: 896px;
   margin: auto;
-  flex-direction: column;
-  padding-left: 30px;
-  justify-content: space-between;
-  padding-bottom: 40px;
-  .titleRecipe {
+  .titleRecipe{
     padding: 3%;
     font-weight: 700;
     font-size: 20px;
     letter-spacing: 4px;
-    color: $body;
+    color: $headings;
   }
-  .addInfoRecipe {
+  .detail {
     display: flex;
-    flex-direction: row;
-    .Info {
+    justify-content: space-between;
+    align-items: center;
+    .recipeImage{
+      border: 1px solid $purple-2;
+      border-radius: 50%;
+      width: 202px;
+      height: 202px;
+    }
+    .addInfoRecipe {
       display: flex;
       flex-direction: column;
       margin: 1% 3%;
       font-size: 20px;
       gap: 10px;
       justify-content: center;
-      width: 70%;
       .Infotext {
         margin-left: 10px;
       }
+      .purple-icon-I{
+        color: $purple-2;
+      }
     }
-  }
-  .recipeImage {
-    overflow: hidden;
   }
 }
 .bottomPart {
   display: flex;
   max-width: 896px;
   margin: auto;
-  background-color: $body;
-  height: 100%;
   flex-direction: column;
   .line {
     width: 200px;
     margin: 20px auto;
     color: $purple-1;
   }
-  .active{
-    color: $purple-2;
+  .active {
+    color: $headings;
   }
-  .activeTabContent{
-    border: 1px solid #ccc;
+  .activeTabContent {
+    border: 1px solid $purple-2;
     margin: 10px;
   }
-  .tabs{
+  .tabs {
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: 500;
   }
-  .list-group-custom{
+  .list-group-custom {
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     font-weight: 500;
   }
@@ -78,22 +81,21 @@
     text-align: justify;
 
     li {
-        position: relative;
-        border: none;
+      position: relative;
+      border: none;
 
-        span.bullet {
-            position: absolute;
-            left: 0;
-            top: 16px;
-            width: 10px; 
-            height: 10px; 
-            background-color: $purple-1; 
-            border-radius: 50%;
-        }
-        .description{
-            margin-left: 10px;
-        }
+      span.bullet {
+        position: absolute;
+        left: 0;
+        top: 16px;
+        width: 10px;
+        height: 10px;
+        background-color: $purple-2;
+        border-radius: 50%;
+      }
+      .description {
+        margin-left: 10px;
+      }
     }
-}
-
+  }
 }
