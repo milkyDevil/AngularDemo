@@ -10,6 +10,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { LoginregisterComponent } from './pages/loginregister/loginregister.component';
+import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
+import { HeadertitleComponent } from './components/headertitle/headertitle.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { LoginregisterComponent } from './pages/loginregister/loginregister.comp
     HeaderComponent,
     FooterComponent,
     RecipeComponent,
-    LoginregisterComponent
+    LoginregisterComponent,
+    UploadrecipeComponent,
+    HeadertitleComponent
   ],
   imports: [
     BrowserModule,
