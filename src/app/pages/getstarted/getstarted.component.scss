@@ -1,13 +1,15 @@
 @import '/src/assets/styles/globalVariables.scss';
 
-.container {
+.mainContainer {
   background-image: url("../../../assets/homebannerBg.jpg");
   background-size: cover;
   height: 100vh;
+  max-width: 896px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 .content {
