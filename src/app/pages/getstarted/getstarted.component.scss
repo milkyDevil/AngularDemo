@@ -1,27 +1,36 @@
-@import '/src/assets/styles/globalVariables.scss';
+@import "/src/assets/styles/globalVariables.scss";
 
 .mainContainer {
-  background-image: url("../../../assets/homebannerBg.jpg");
-  background-size: cover;
   height: 100vh;
   max-width: 896px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
   margin: auto;
+  background-color: $body;
+  .main-image {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }
 
 .content {
   text-align: center;
-  color: $purple-1;
-  position: absolute;
-  top: 20%;
-  width: 100%;
+  color: $purple-2;
+  padding: 30px 20px;
+}
+
+.foot-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 30px 20px;
 }
 
 .btn {
-  position: absolute;
-  bottom: 10%;
   background-color: $purple-2;
 }
