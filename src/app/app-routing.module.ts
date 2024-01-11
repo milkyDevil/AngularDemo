@@ -7,11 +7,12 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
 
 const routes: Routes = [
-  { path: 'getstared', component: GetstartedComponent },
+  { path: '', component: GetstartedComponent },
   { path: 'loginregister', component: LoginregisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'recipe', component: RecipeComponent },
   { path: 'uploadrecipe', component: UploadrecipeComponent },
+  { path: '', redirectTo:'/home', pathMatch: 'full' },
 ];
 
 @NgModule({

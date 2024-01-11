@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeSelfInfo } from './getstarted';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-getstarted',
@@ -7,6 +8,8 @@ import { ResumeSelfInfo } from './getstarted';
   styleUrls: ['./getstarted.component.scss']
 })
 export class GetstartedComponent implements OnInit {
+  constructor(private router: Router) {}
+
   fullname = 'Mahmuda Begum';
   nickname = 'Milky';
   SelfInfo: ResumeSelfInfo = {
@@ -16,7 +19,10 @@ export class GetstartedComponent implements OnInit {
     Address: '*****',
   };
 
-  constructor() {}
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
+
   ngOnInit(): void {}
   FnGoToLoginPage() {}
 }
