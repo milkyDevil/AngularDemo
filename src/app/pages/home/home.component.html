@@ -25,6 +25,7 @@
   <div class="recipe-container">
     <ng-container *ngIf="AllRecipes.length > 0; else noRecipes">
       <div class="card-container" *ngFor="let recipe of AllRecipes">
+        <div (click)="navigateToRecipeDetail()">
         <div class="card u-clearfix">
           <div class="card-body">
             <div class="main-part">
@@ -48,6 +49,7 @@
           </div>
         </div>
         <div class="card-shadow"></div>
+      </div>
       </div>
     </ng-container>
     <ng-template #noRecipes>

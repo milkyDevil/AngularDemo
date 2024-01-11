@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeObject } from './home';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { RecipeObject } from './home';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  constructor(private router: Router) {}
   DummyImagePath = 'assets/images/UploadPreviewImage.png';
   AllRecipes: RecipeObject[] = [
     {
@@ -41,7 +43,8 @@ export class HomeComponent implements OnInit {
       RecipeDescription: 'A healthy and delicious salad with grilled chicken.',
     },
   ];
-
-  constructor() {}
+  navigateToRecipeDetail() {
+    this.router.navigate(['/recipe']);
+  }
   ngOnInit(): void {}
 }
