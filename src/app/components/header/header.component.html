@@ -2,7 +2,7 @@
   <button class="border-0 bg-transparent" (click)="setSideBar(true)">
     <span class="bi bi-list fs-3 purple-icon-I"></span>
   </button>
-  <button class="border-0 bg-transparent">
+  <button class="border-0 bg-transparent" (click)="navigateToLoginRegister()">
     <span class="bi bi-person fs-3 purple-icon-I"></span>
   </button>
   <ng-container *ngIf="ShowSideBar">
@@ -11,6 +11,12 @@
         <div class="nav-link" (click)="setSideBar(false)">
           <span class="bi bi-x fs-3 purple-icon-I"></span>
         </div>
+        <div class="nav-link" (click)="navigateToUploadRecipe()">
+         Upload
+        </div>
+        <div class="nav-link" (click)="navigateToHome()">
+          Home
+         </div>
         <!-- <a class="nav-link active" href="#"></a>
         <a class="nav-link" href="#">Link</a>
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->

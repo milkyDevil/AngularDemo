@@ -59,7 +59,7 @@
   </div>
 
   <div class="foot-content">
-    <button type="button" class="btn btnColor">{{ActiveTab}}</button>
+    <button type="button" class="btn btnColor" (click)="navigateToHome()">{{ActiveTab}}</button>
     <div>
       
       {{ActiveTab === 'Register' ? 'Already have an account?' : "Don't have an account?"}}
