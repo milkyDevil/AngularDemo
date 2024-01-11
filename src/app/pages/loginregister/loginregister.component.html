@@ -1,0 +1,69 @@
+<div class="mainContainer">
+  <div class="main-content">
+    <div class="welcomt-text">
+      Explore a world of delightful recipes, discover cooking tips, and share
+      your own culinary creations with our vibrant community.
+    </div>
+    <div class="form-content">
+      <div class="title-login-register">{{ActiveTab}}</div>
+      <div class="row g-3 align-items-center form-part">
+        <div class="col-12" *ngIf="ActiveTab === 'Register'">
+          <label class="visually-hidden" for="inlineFormInputGroupUsername"
+            >Name</label
+          >
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="inlineFormInputGroupUsername"
+            placeholder="Name"
+          />
+        </div>
+
+        <div class="col-12">
+          <label class="visually-hidden" for="inlineFormInputGroupEmail"
+            >Email</label
+          >
+          <input
+            type="email"
+            class="form-control custom-input"
+            id="inlineFormInputGroupEmail"
+            placeholder="Email"
+          />
+        </div>
+        <div class="col-12" *ngIf="ActiveTab === 'Register'">
+          <label class="visually-hidden" for="inlineFormInputGroupPhone"
+            >Phone</label
+          >
+          <input
+            type="tel"
+            class="form-control custom-input"
+            id="inlineFormInputGroupPhone"
+            placeholder="Phone"
+          />
+        </div>
+        <div class="col-12">
+          <label class="visually-hidden" for="inlineFormInputGroupPassword"
+            >Password</label
+          >
+          <input
+            type="password"
+            class="form-control custom-input"
+            id="inlineFormInputGroupPassword"
+            placeholder="Password"
+          />
+        </div>
+      </div>
+      <div class="form-shadow"></div>
+      <div class="forgot-pssword" *ngIf="ActiveTab === 'Login'">Forgot Password?</div>
+    </div>
+  </div>
+
+  <div class="foot-content">
+    <button type="button" class="btn btnColor">{{ActiveTab}}</button>
+    <div>
+      
+      {{ActiveTab === 'Register' ? 'Already have an account?' : "Don't have an account?"}}
+      <button type="button" class="btn btnColorLast" (click)="setActiveTab(ActiveTab === 'Login' ? 'Register' : 'Login')">{{ActiveTab === 'Login' ? 'Register' : 'Login'}}</button>
+    </div>
+  </div>
+</div>

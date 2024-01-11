@@ -1,0 +1,102 @@
+@import "/src/assets/styles/globalVariables.scss";
+.mainContainer {
+  height: 100vh;
+  background-color: $body;
+  .welcomt-text {
+    color: $body-alt;
+    padding: 20px 10px;
+    font-weight: 500;
+    margin: 0 auto;
+    color: $purple-2;
+  }
+  .form-part {
+    background-color: #ffffff;
+    display: flex;
+    max-width: 896px;
+    margin: auto;
+    flex-direction: column;
+    padding: 20px 10px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: -1px 7px 7px 0px #ca93f1d6;
+    z-index: 1;
+  }
+  .form-shadow {
+    background-color: #ffffff;
+    width: 92%;
+    max-width: 824px;
+    margin: auto;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    position: relative;
+    height: 10px;
+    box-shadow: -1px 7px 7px 0px #9d4adf63;
+    z-index: 0;
+  }
+  .form-content {
+    margin: 0px 10px;
+    border-radius: 10px;
+  }
+}
+
+.foot-content {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  flex-direction: column;
+  gap: 15px;
+  margin: auto;
+  color: $purple-2;
+}
+.title-login-register {
+  text-align: center;
+  margin: 10px 0px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $headings;
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+.forgot-pssword {
+  text-align: center;
+  margin: 15px 0px;
+  color: $purple-2;
+}
+.btnColor {
+  background-color: $purple-2;
+  color: $body;
+  padding: 10px 30px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+.btnColorLast {
+  color: $headings;
+  font-weight: 500;
+  font-weight: 500;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 63vh;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.col-12 {
+  input.custom-input {
+    border-color: $purple-1;
+
+    &::placeholder {
+      color: $purple-1;
+      font-size: 14px;
+    }
+
+    &:focus {
+      border-color: $purple-2;
+    }
+  }
+}

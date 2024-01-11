@@ -1,0 +1,89 @@
+<div class="mainContainer">
+  <app-header></app-header>
+  <div class="mainDiv">
+    <div class="row g-3 top-detail-part">
+      <div class="col-12 titleRecipe">
+        {{ RecipeTitle }}
+      </div>
+
+      <div class="col-12 detail">
+        <div class="recipeImage">
+          <img
+            src="{{ RecipeImageUrl }}"
+            alt="{{ RecipeTitle }}"
+            class="rounded-circle"
+            width="200"
+            height="200"
+          />
+        </div>
+
+        <div class="addInfoRecipe">
+          <div>
+            <span class="bi bi-clock fs-3 purple-icon-I"></span
+            ><span class="Infotext">{{ PreparationTime }}</span>
+          </div>
+          <div>
+            <span class="bi bi-person fs-3 purple-icon-I"></span
+            ><span class="Infotext">{{ ServingCount }}</span>
+          </div>
+          <div>
+            <span class="bi bi-fire fs-3 purple-icon-I"></span
+            ><span class="Infotext">{{ CalorieCount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomPart rounded-2">
+      <hr class="line" />
+      <div class="row tabs">
+        <div class="d-flex justify-content-around align-self-stretch">
+          <div
+            [ngClass]="{
+              active: ActiveTab === 'Ingredients',
+              lightGrey: ActiveTab !== 'Ingredients'
+            }"
+            (click)="setActiveTab('Ingredients')"
+          >
+            Ingredients
+          </div>
+          <div
+            [ngClass]="{
+              active: ActiveTab === 'Direction',
+              lightGrey: ActiveTab !== 'Direction'
+            }"
+            (click)="setActiveTab('Direction')"
+          >
+            Direction
+          </div>
+        </div>
+      </div>
+      <div class="row activeTabContent rounded-3">
+        <ng-container *ngIf="ActiveTab === 'Ingredients'">
+          <ul class="list-group list-group-flush list-group-custom">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let ingredients of RecipeIngredients"
+            >
+              {{ ingredients.Name }}
+              <span class="subtle"> {{ ingredients.Amount }}</span>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-container *ngIf="ActiveTab === 'Direction'">
+          <ul class="list-group list-group-custom list-group-custom-direction">
+            <li
+              class="list-group-item d-flex"
+              *ngFor="let description of RecipeDescription"
+            >
+              <span class="bullet"></span>
+              <span class="description">
+                {{ description }}
+              </span>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,89 @@
+<app-headertitle></app-headertitle>
+<div class="mainContainer">
+  <div class="row g-3 align-items-center form-part">
+    <div class="col-12">
+      <label class="recipeImage" for="recipeImage">
+        <div class="image-preview">
+          <img
+            id="previewImage"
+            class="img-fluid"
+            src="assets/images/UploadPreviewImage.png"
+            alt="Recipe Image"
+          />
+          <div class="overlay">
+            <span class="bi bi-plus"></span>
+          </div>
+        </div>
+      </label>
+      <input
+        type="file"
+        class="form-control visually-hidden"
+        id="recipeImage"
+        accept="image/*"
+      />
+    </div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Recipe Name"
+      />
+    </div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Time (e.g in 30m)"
+      />
+    </div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Time (e.g in 30 MIN)"
+      />
+    </div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Serving Count (e.g in 2)"
+      />
+    </div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Calorie Count (e.g in 23 KCal)"
+      />
+    </div>
+    <div class="col-12 ingredient-input-group">
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Ingredient"
+        />
+      </div>
+      <div class="col-3">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Qty"
+        />
+      </div>
+    </div>
+    <div class="col-12 ingredient-add-more">Add more ingredients</div>
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control custom-input"
+        placeholder="Directions steps"
+      />
+    </div>
+    <div class="col-12 ingredient-add-more">Add more direction steps</div>
+    <div class="col-12 upload-button-div">
+      <button type="button" class="btn btnColor">Upload</button>
+    </div>
+  </div>
+</div>

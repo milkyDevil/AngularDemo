@@ -1,0 +1,39 @@
+@import "/src/assets/styles/globalVariables.scss";
+
+.mainContainer {
+  height: 100vh;
+  max-width: 896px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: $body;
+  .main-image {
+    max-width: 896px;
+    max-height: 370px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.content {
+  text-align: center;
+  color: $purple-2;
+  padding: 30px 20px;
+}
+
+.foot-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 30px 20px;
+}
+
+.btn {
+  background-color: $purple-2;
+}
