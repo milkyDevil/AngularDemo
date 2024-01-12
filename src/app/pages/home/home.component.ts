@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeObject } from './home';
 import { Router } from '@angular/router';
+import { HomeService } from './services/home.service';
+import { RecipeObject } from './home';
 
 @Component({
   selector: 'app-home',
@@ -8,43 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private homeService : HomeService) {}
+  data: any;
   DummyImagePath = 'assets/images/UploadPreviewImage.png';
-  AllRecipes: RecipeObject[] = [
-    {
-      RecipeNumber: '01',
-      RecipeTitle: 'Delicious Pancakes',
-      RecipeImage: 'https://s15.postimg.cc/temvv7u4r/recipe.jpg',
-      RecipeDescription: 'A tasty breakfast treat to start your day A tasty breakfast treat to start your day A tasty breakfast treat to start your day A tasty breakfast treat to start your day A tasty breakfast treat to start your day A tasty breakfast treat to start your day.',
-    },
-    {
-      RecipeNumber: '02',
-      RecipeTitle: 'Spaghetti Bolognese',
-      RecipeImage:
-        'https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg',
-      RecipeDescription: 'Classic Italian pasta dish with a rich meat sauce.',
-    },
-    {
-      RecipeNumber: '03',
-      RecipeTitle: 'Vegetarian Pizza',
-      RecipeImage: '',
-      RecipeDescription: 'A flavorful pizza loaded with fresh vegetables.',
-    },
-    {
-      RecipeNumber: '04',
-      RecipeTitle: 'Chocolate Chip Cookies',
-      RecipeImage: 'https://s15.postimg.cc/temvv7u4r/recipe.jpg',
-      RecipeDescription: 'Homemade cookies with gooey chocolate chips.',
-    },
-    {
-      RecipeNumber: '05',
-      RecipeTitle: 'Grilled Chicken Salad',
-      RecipeImage: '',
-      RecipeDescription: 'A healthy and delicious salad with grilled chicken.',
-    },
-  ];
+  AllRecipes: RecipeObject[] = []
   navigateToRecipeDetail() {
     this.router.navigate(['/recipe']);
   }
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.AllRecipes = this.homeService.getRecipeList()
+  }
 }
