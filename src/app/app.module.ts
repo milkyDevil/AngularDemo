@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
 import { LoginregisterComponent } from './pages/loginregister/loginregister.component';
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
 import { HeadertitleComponent } from './components/headertitle/headertitle.component';
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 
 @NgModule({
   declarations: [
@@ -23,14 +25,10 @@ import { HeadertitleComponent } from './components/headertitle/headertitle.compo
     RecipeComponent,
     LoginregisterComponent,
     UploadrecipeComponent,
-    HeadertitleComponent
+    HeadertitleComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  providers: [{ provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
