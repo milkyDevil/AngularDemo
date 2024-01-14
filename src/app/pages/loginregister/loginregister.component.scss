@@ -100,3 +100,10 @@
     }
   }
 }
+.error-msg {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  margin: 2px 0px;
+  color: red;
+}

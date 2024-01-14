@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,7 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
     UploadrecipeComponent,
     HeadertitleComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule,FormsModule],
   providers: [{ provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG }],
   bootstrap: [AppComponent],
 })
