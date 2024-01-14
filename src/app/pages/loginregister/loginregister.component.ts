@@ -48,7 +48,10 @@ export class LoginregisterComponent implements OnInit {
       return;
     }
 
-    console.log('Calling API for login...');
+    this.loginregisterService.loginApiFn(this.login).subscribe((data) => {
+      console.log('loginApiFn', data);
+      this.router.navigate(['/home']);
+    });
   }
 
   private validateEmail(): void {
