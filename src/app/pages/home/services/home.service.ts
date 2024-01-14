@@ -45,9 +45,9 @@ export class HomeService {
   ];
   DummyList: any = [];
 
-  getDummyList$ = this.http.get<any>(`${this.config.apiEndpoint}/posts/1`).pipe(
-    shareReplay(1)
-  )
+  getDummyList$ = this.http
+    .get<any>(`${this.config.apiEndpoint}/posts/1`)
+    .pipe(shareReplay(1));
 
   constructor(
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
@@ -109,5 +109,21 @@ export class HomeService {
       }
     );
     return this.http.request<any>(request);
+  }
+
+  getUsers() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    const body = {};
+
+    return this.http.post<any>(
+      `https://ap-south-1.aws.data.mongodb-api.com/app/application-0-jwixf/endpoint/getuser`,
+      body,
+      {
+        headers,
+      }
+    );
   }
 }
