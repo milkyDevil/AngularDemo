@@ -119,7 +119,7 @@ export class HomeService {
     const body = {};
 
     return this.http.post<any>(
-      `https://ap-south-1.aws.data.mongodb-api.com/app/application-0-jwixf/endpoint/getuser`,
+      `${this.config.baseURL}/getuser`,
       body,
       {
         headers,
