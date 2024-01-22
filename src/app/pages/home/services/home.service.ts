@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { RecipeObject } from '../home';
+import { RecipeObject } from 'src/app/Store/Model/Home.model';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';

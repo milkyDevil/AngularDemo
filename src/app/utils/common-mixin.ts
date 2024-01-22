@@ -1,5 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
-
 export const CommonMixin = {
   sanitizeEmail: (email: string): string => {
     return email.trim().toLowerCase();
@@ -15,14 +13,4 @@ export const CommonMixin = {
     return password.length >= minLength;
   },
 
-  handleError: (error: HttpErrorResponse) => {
-    const errorMessage = 'Something went wrong. Please try again later.';
-    if (error.error instanceof ErrorEvent) {
-      console.error('Client Error:', error.error.message);
-      return errorMessage;
-    } else {
-      console.error('Server Error:', error.status, error.error);
-      return error.error.message || errorMessage;
-    }
-  },
 };

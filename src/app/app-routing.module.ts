@@ -5,14 +5,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginregisterComponent } from './pages/loginregister/loginregister.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: '', component: GetstartedComponent },
   { path: 'loginregister', component: LoginregisterComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'recipe', component: RecipeComponent },
-  { path: 'uploadrecipe', component: UploadrecipeComponent },
-  { path: '', redirectTo:'/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate:[authGuard] },
+  { path: 'recipe', component: RecipeComponent, canActivate:[authGuard]  },
+  { path: 'uploadrecipe', component: UploadrecipeComponent, canActivate:[authGuard]  },
+  { path: '', redirectTo:'/loginregister', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,13 @@ import { LoginregisterComponent } from './pages/loginregister/loginregister.comp
 import { UploadrecipeComponent } from './pages/uploadrecipe/uploadrecipe.component';
 import { HeadertitleComponent } from './components/headertitle/headertitle.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { UserReducer } from './Store/User/User.Reducer';
+import { UserEffect } from './Store/User/User.Effects';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,18 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
     UploadrecipeComponent,
     HeadertitleComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule,FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    EffectsModule.forRoot([UserEffect]),
+    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot({user: UserReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    NgbToastModule
+  ],
   providers: [{ provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG }],
   bootstrap: [AppComponent],
 })

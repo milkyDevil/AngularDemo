@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeService } from './services/home.service';
-import { RecipeObject } from './home';
+import { RecipeObject } from 'src/app/Store/Model/Home.model';
 import { Observable } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("router",this.router.url)
     this.AllRecipes = this.homeService.getRecipeList();
     this.stream.subscribe({
       next: (value) => console.log('value', value),

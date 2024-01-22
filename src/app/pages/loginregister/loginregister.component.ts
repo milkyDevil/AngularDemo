@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginregisterService } from './services/loginregister.service';
-import { ILoginPayload, IRegisterPayload } from './loginregister';
+import { UserService } from 'src/app/service/user.service';
+import {
+  ILoginPayload,
+  IRegisterPayload
+} from 'src/app/Store/Model/LoginRegister.model';
 import { ErrorMessages } from 'src/app/constants';
 import { CommonMixin } from 'src/app/utils/common-mixin';
+import { Store } from '@ngrx/store';
+import { beginLogin } from 'src/app/Store/User/User.action';
 
 @Component({
   selector: 'app-loginregister',
@@ -22,10 +27,13 @@ export class LoginregisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginregisterService: LoginregisterService
+    private loginregisterService: UserService,
+    private store: Store
   ) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.loginregisterService.clearUserToLocalStore()
+  }
 
   public setActiveTab(tab: string): void {
     this.activeTab = tab;
@@ -36,7 +44,8 @@ export class LoginregisterComponent implements OnInit {
     if (this.activeTab === 'Login') {
       this.handleLogin();
     } else {
-      this.router.navigate(['/home']);
+     // this.router.navigate(['/home']);
+      this.handleRegister();
     }
   }
 
@@ -48,10 +57,11 @@ export class LoginregisterComponent implements OnInit {
       return;
     }
 
-    this.loginregisterService.loginApiFn(this.login).subscribe((data) => {
-      console.log('loginApiFn', data);
-      this.router.navigate(['/home']);
-    });
+    this.store.dispatch(beginLogin({userdata: this.login}))
+  }
+
+  private handleRegister():void {
+    
   }
 
   private validateEmail(): void {
