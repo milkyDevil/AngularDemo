@@ -7,8 +7,11 @@
       </div>
       <div class="form-content">
         <div class="title-login-register">{{ activeTab }}</div>
-        <div class="row g-3 align-items-center form-part" *ngIf="activeTab === 'Register'">
-          <div class="col-12" >
+        <div
+          class="row g-3 align-items-center form-part"
+          *ngIf="activeTab === 'Register'"
+        >
+          <div class="col-12">
             <label class="visually-hidden" for="inlineFormInputGroupUsername"
               >Name</label
             >
@@ -17,7 +20,13 @@
               class="form-control custom-input"
               id="inlineFormInputGroupUsername"
               placeholder="Name"
+              [(ngModel)]="register.name"
+              autocomplete="off"
+              (focus)="resetError('name')"
             />
+            <div class="error-msg" *ngIf="_errorRegisterName">
+              {{ _errorMessageName }}
+            </div>
           </div>
           <div class="col-12">
             <label class="visually-hidden" for="inlineFormInputGroupEmail"
@@ -28,7 +37,13 @@
               class="form-control custom-input"
               id="inlineFormInputGroupEmail"
               placeholder="Email"
+              [(ngModel)]="register.email"
+              autocomplete="off"
+              (focus)="resetError('email')"
             />
+            <div class="error-msg" *ngIf="_errorLoginEmail">
+              {{ _errorMessageEmail }}
+            </div>
           </div>
           <div class="col-12">
             <label class="visually-hidden" for="inlineFormInputGroupPhone"
@@ -39,7 +54,13 @@
               class="form-control custom-input"
               id="inlineFormInputGroupPhone"
               placeholder="Phone"
+              [(ngModel)]="register.phone"
+              autocomplete="off"
+              (focus)="resetError('phone')"
             />
+            <div class="error-msg" *ngIf="_errorLoginPhone">
+              {{ _errorMessagePhone }}
+            </div>
           </div>
           <div class="col-12">
             <label class="visually-hidden" for="inlineFormInputGroupPassword"
@@ -50,10 +71,19 @@
               class="form-control custom-input"
               id="inlineFormInputGroupPassword"
               placeholder="Password"
+              [(ngModel)]="register.password"
+              autocomplete="off"
+              (focus)="resetError('password')"
             />
+            <div class="error-msg" *ngIf="_errorLoginPassword">
+              {{ _errorMessagePassword }}
+            </div>
           </div>
         </div>
-        <div class="row g-3 align-items-center form-part" *ngIf="activeTab === 'Login'">
+        <div
+          class="row g-3 align-items-center form-part"
+          *ngIf="activeTab === 'Login'"
+        >
           <div class="col-12">
             <label class="visually-hidden" for="inlineFormInputGroupEmail"
               >Email</label
@@ -69,7 +99,7 @@
               (focus)="resetError('email')"
             />
             <div class="error-msg" *ngIf="_errorLoginEmail">
-              {{_errorMessageEmail}}
+              {{ _errorMessageEmail }}
             </div>
           </div>
           <div class="col-12">
@@ -87,7 +117,7 @@
               (focus)="resetError('password')"
             />
             <div class="error-msg" *ngIf="_errorLoginPassword">
-              {{_errorMessagePassword}}
+              {{ _errorMessagePassword }}
             </div>
           </div>
         </div>
