@@ -73,6 +73,7 @@ export class LoginregisterComponent implements OnInit {
     this.login.email = this.loginEmail;
     this.login.password = this.loginPassword;
     this.store.dispatch(beginLogin({ userdata: this.login }));
+    this.resetFormFields()
   }
 
   handleRegister(): void {
@@ -90,6 +91,7 @@ export class LoginregisterComponent implements OnInit {
     this.register.password = this.registerPassword;
 
     this.store.dispatch(beginRegister({ userdata: this.register }));
+    this.resetFormFields()
   }
 
   validateRegisterName(): void {

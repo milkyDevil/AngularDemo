@@ -21,7 +21,7 @@
               id="inlineFormInputGroupUsername"
               placeholder="Name"
               name="nameRegister"
-              [(ngModel)]="register.name"
+              [(ngModel)]="registerName"
               autocomplete="off"
               (focus)="resetError('name')"
             />
@@ -39,7 +39,7 @@
               id="inlineFormInputGroupEmailRegister"
               placeholder="Email"
               name="emailRegister"
-              [(ngModel)]="register.email"
+              [(ngModel)]="registerEmail"
               autocomplete="off"
               (focus)="resetError('email')"
             />
@@ -57,7 +57,7 @@
               id="inlineFormInputGroupPhone"
               name="phoneRegister"
               placeholder="Phone"
-              [(ngModel)]="register.phone"
+              [(ngModel)]="registerPhone"
               autocomplete="off"
               (focus)="resetError('phone')"
             />
@@ -75,7 +75,7 @@
               id="inlineFormInputGroupPasswordRegister"
               placeholder="Password"
               name="passwordRegister"
-              [(ngModel)]="register.password"
+              [(ngModel)]="registerPassword"
               autocomplete="off"
               (focus)="resetError('password')"
             />
