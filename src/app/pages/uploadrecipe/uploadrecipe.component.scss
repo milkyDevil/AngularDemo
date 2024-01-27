@@ -63,6 +63,26 @@
     &:focus {
       border-color: $purple-2;
     }
+
+    &[type="radio"] {
+      appearance: none; 
+      width: 20px; 
+      height: 20px;
+      border: 2px solid $purple-1; 
+      border-radius: 50%; 
+      outline: none; 
+      cursor: pointer; 
+
+      &:checked {
+        background-color: $purple-2; 
+        border-color: $purple-2; 
+      }
+
+      & + label {
+        margin-left: 10px; 
+        cursor: pointer; 
+      }
+    }
   }
 }
 .ingredient-input-group {
@@ -86,4 +106,15 @@
 .upload-button-div {
   display: flex;
   justify-content: center;
+}
+.form-select.custom-input {
+  border-color: $purple-1; 
+}
+
+.form-select.custom-input:focus {
+  border-color: $purple-2; 
+}
+
+.textLabel {
+  color: $purple-1;
 }

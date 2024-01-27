@@ -29,6 +29,26 @@
         placeholder="Recipe Name"
       />
     </div>
+
+    <div class="col-12">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input custom-input" type="radio" name="vegNonVeg" id="vegOption" value="Veg" [(ngModel)]="selectedType">
+        <label class="form-check-label textLabel" for="vegOption">Veg</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input custom-input" type="radio" name="vegNonVeg" id="nonVegOption" value="Non-Veg" [(ngModel)]="selectedType">
+        <label class="form-check-label textLabel" for="nonVegOption">Non-Veg</label>
+      </div>
+    </div>
+    
+
+    <div class="col-12">
+      <select class="form-select custom-input textLabel" [(ngModel)]="selectedCategory">
+        <option value="" class="textLabel">Select Category</option>
+        <option class="textLabel" *ngFor="let category of recipeCategories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
     <div class="col-12">
       <input
         type="text"
