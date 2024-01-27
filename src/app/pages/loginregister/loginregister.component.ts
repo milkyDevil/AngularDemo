@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
-import {
-  ILoginPayload,
-  IRegisterPayload
-} from 'src/app/Store/Model/LoginRegister.model';
-import { ErrorMessages } from 'src/app/constants';
-import { CommonMixin } from 'src/app/utils/common-mixin';
 import { Store } from '@ngrx/store';
 import { beginLogin, beginRegister } from 'src/app/Store/User/User.action';
+import { ILoginPayload, IRegisterPayload } from 'src/app/Store/Model/LoginRegister.model';
+import { ErrorMessages } from 'src/app/constants';
+import { CommonMixin } from 'src/app/utils/common-mixin';
 
 @Component({
   selector: 'app-loginregister',
@@ -16,6 +13,24 @@ import { beginLogin, beginRegister } from 'src/app/Store/User/User.action';
   styleUrls: ['./loginregister.component.scss'],
 })
 export class LoginregisterComponent implements OnInit {
+  public activeTab: string = 'Login';
+  public login: ILoginPayload = { email: '', password: '' };
+  public register: IRegisterPayload = {
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    role: 'User',
+  };
+
+  public loginEmail : string = ''
+  public loginPassword : string = ''
+
+  public registerName : string = ''
+  public registerEmail : string = ''
+  public registerPhone : string = ''
+  public registerPassword : string = ''
+
   public _errorRegisterName: boolean = false;
   public _errorLoginEmail: boolean = false;
   public _errorLoginPhone: boolean = false;
@@ -25,46 +40,42 @@ export class LoginregisterComponent implements OnInit {
   public _errorMessagePhone: string = '';
   public _errorMessagePassword: string = '';
 
-  public activeTab = 'Login';
-  public login: ILoginPayload = { email: '', password: '' };
-  public register: IRegisterPayload = { name: '', email: '', phone: '', password: '', role: 'User' };
-
   constructor(
     private router: Router,
     private loginregisterService: UserService,
     private store: Store
   ) {}
 
-  public ngOnInit(): void {
-    this.loginregisterService.clearUserToLocalStore()
+  ngOnInit(): void {
+    this.loginregisterService.clearUserToLocalStore();
   }
 
-  public setActiveTab(tab: string): void {
+  setActiveTab(tab: string): void {
     this.activeTab = tab;
     this.resetFormErrors();
   }
 
-  public loginRegisterFn(): void {
+  loginRegisterFn(): void {
     if (this.activeTab === 'Login') {
       this.handleLogin();
     } else {
-     // this.router.navigate(['/home']);
       this.handleRegister();
     }
   }
 
-  private handleLogin(): void {
+  handleLogin(): void {
     this.validateEmail();
     this.validatePassword();
 
     if (this.hasErrors()) {
       return;
     }
-
-    this.store.dispatch(beginLogin({userdata: this.login}))
+    this.login.email = this.loginEmail;
+    this.login.password = this.loginPassword;
+    this.store.dispatch(beginLogin({ userdata: this.login }));
   }
 
-  private handleRegister():void {
+  handleRegister(): void {
     this.validateRegisterName();
     this.validateRegisterEmail();
     this.validateRegisterPhone();
@@ -73,98 +84,95 @@ export class LoginregisterComponent implements OnInit {
     if (this.hasRegisterErrors()) {
       return;
     }
+    this.register.name = this.registerName;
+    this.register.email = this.registerEmail;
+    this.register.phone = this.registerPhone;
+    this.register.password = this.registerPassword;
 
-    this.store.dispatch(beginRegister({userdata: this.register}))
+    this.store.dispatch(beginRegister({ userdata: this.register }));
   }
 
-  private validateRegisterName(): void {
-    const name = this.register.name.trim();
+  validateRegisterName(): void {
+    const name = this.registerName.trim();
     if (!name) {
       this.showError('name', ErrorMessages.EmptyField);
+      return;
     }
-    if (!/^[a-zA-Z\s]+$/.test(name)) {
-      this.showError('name', ErrorMessages.NameLetterSpace);
+    if (name.length > 20 || !/^[a-zA-Z\s]+$/.test(name) || (name.match(/\s/g) || []).length > 1) {
+      this.showError('name', ErrorMessages.InvalidNameFormat);
     }
   }
 
-  private validateRegisterEmail(): void {
-    const email = this.register.email.trim();
-    if (!email) {
-      this.showError('email', ErrorMessages.EmptyField);
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+  validateRegisterEmail(): void {
+    const email = this.registerEmail.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       this.showError('email', ErrorMessages.InvalidEmailFormat);
     }
   }
 
-  private validateRegisterPhone(): void {
-    const phone = this.register.phone.trim();
-    if (!phone) {
-      this.showError('phone', ErrorMessages.EmptyField);
-    }
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone)) {
+  validateRegisterPhone(): void {
+    const phone = this.registerPhone.trim();
+    if (!phone || !/^\d{10}$/.test(phone)) {
       this.showError('phone', ErrorMessages.InvalidPhoneFormat);
     }
   }
 
-  private validateRegisterPassword(): void {
-    const password = this.register.password.trim();
-    if (!password) {
-      this.showError('password', ErrorMessages.EmptyField);
-    }
-    if (password.length < 8) {
+  validateRegisterPassword(): void {
+    const password = this.registerPassword.trim();
+    if (!password || password.length < 8 || password.length > 20) {
       this.showError('password', ErrorMessages.PasswordMinChar);
     }
   }
 
-  private validateEmail(): void {
-    if (!this.login.email.trim()) {
-      this.showError('email', ErrorMessages.EmptyField);
-    } else {
-      this.login.email = CommonMixin.sanitizeEmail(this.login.email);
-      if (!CommonMixin.isValidEmail(this.login.email)) {
-        this.showError('email', ErrorMessages.InvalidEmailFormat);
-      }
+  validateEmail(): void {
+    const email = this.loginEmail.trim();
+    if (!email || !CommonMixin.isValidEmail(email)) {
+      this.showError('email', ErrorMessages.InvalidEmailFormat);
     }
   }
 
-  private validatePassword(): void {
-    if (!this.login.password.trim()) {
-      this.showError('password', ErrorMessages.EmptyField);
-    } else {
-      if (!CommonMixin.isValidPassword(this.login.password)) {
-        this.showError('password', ErrorMessages.InvalidPasswordFormat);
-      }
+  validatePassword(): void {
+    const password = this.loginPassword.trim();
+    if (!password || !CommonMixin.isValidPassword(password)) {
+      this.showError('password', ErrorMessages.InvalidPasswordFormat);
     }
   }
 
-  private hasErrors(): boolean {
+  hasErrors(): boolean {
     return this._errorLoginEmail || this._errorLoginPassword;
   }
 
-  private hasRegisterErrors(): boolean {
-    return this._errorRegisterName || this._errorLoginPhone || this._errorLoginEmail || this._errorLoginPassword;
+  hasRegisterErrors(): boolean {
+    return (
+      this._errorRegisterName ||
+      this._errorLoginPhone ||
+      this._errorLoginEmail ||
+      this._errorLoginPassword
+    );
   }
 
-  private showError(field: string, message: string): void {
-    if (field === 'name') {
-      this._errorRegisterName = true;
-      this._errorMessageName = message;
-    } else if (field === 'phone') {
-      this._errorLoginPhone = true;
-      this._errorMessagePhone = message;
-    }else if (field === 'email') {
-      this._errorLoginEmail = true;
-      this._errorMessageEmail = message;
-    } else if (field === 'password') {
-      this._errorLoginPassword = true;
-      this._errorMessagePassword = message;
+  showError(field: string, message: string): void {
+    switch (field) {
+      case 'name':
+        this._errorRegisterName = true;
+        this._errorMessageName = message;
+        break;
+      case 'phone':
+        this._errorLoginPhone = true;
+        this._errorMessagePhone = message;
+        break;
+      case 'email':
+        this._errorLoginEmail = true;
+        this._errorMessageEmail = message;
+        break;
+      case 'password':
+        this._errorLoginPassword = true;
+        this._errorMessagePassword = message;
+        break;
     }
   }
 
-  private resetFormErrors(): void {
+  resetFormErrors(): void {
     this._errorRegisterName = false;
     this._errorMessageName = '';
     this._errorLoginEmail = false;
@@ -176,23 +184,28 @@ export class LoginregisterComponent implements OnInit {
     this.resetFormFields();
   }
 
-  public resetError(field: string): void {
-    if (field === 'name' && this.activeTab === 'Register') {
-      this._errorRegisterName = false;
-      this._errorMessageName = '';
-    } else if (field === 'phone') {
-      this._errorLoginPhone = false;
-      this._errorMessagePhone = '';
-    }else if (field === 'email') {
-      this._errorLoginEmail = false;
-      this._errorMessageEmail = '';
-    } else if (field === 'password') {
-      this._errorLoginPassword = false;
-      this._errorMessagePassword = '';
+  resetError(field: string): void {
+    switch (field) {
+      case 'name':
+        this._errorRegisterName = false;
+        this._errorMessageName = '';
+        break;
+      case 'phone':
+        this._errorLoginPhone = false;
+        this._errorMessagePhone = '';
+        break;
+      case 'email':
+        this._errorLoginEmail = false;
+        this._errorMessageEmail = '';
+        break;
+      case 'password':
+        this._errorLoginPassword = false;
+        this._errorMessagePassword = '';
+        break;
     }
   }
 
-  private resetFormFields(): void {
+  resetFormFields(): void {
     this.login = { email: '', password: '' };
     this.register = { name: '', email: '', phone: '', password: '', role: 'User' };
   }

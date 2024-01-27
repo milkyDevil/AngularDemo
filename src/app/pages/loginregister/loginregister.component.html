@@ -20,6 +20,7 @@
               class="form-control custom-input"
               id="inlineFormInputGroupUsername"
               placeholder="Name"
+              name="nameRegister"
               [(ngModel)]="register.name"
               autocomplete="off"
               (focus)="resetError('name')"
@@ -29,14 +30,15 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupEmail"
+            <label class="visually-hidden" for="inlineFormInputGroupEmailRegister"
               >Email</label
             >
             <input
               type="email"
               class="form-control custom-input"
-              id="inlineFormInputGroupEmail"
+              id="inlineFormInputGroupEmailRegister"
               placeholder="Email"
+              name="emailRegister"
               [(ngModel)]="register.email"
               autocomplete="off"
               (focus)="resetError('email')"
@@ -53,6 +55,7 @@
               type="tel"
               class="form-control custom-input"
               id="inlineFormInputGroupPhone"
+              name="phoneRegister"
               placeholder="Phone"
               [(ngModel)]="register.phone"
               autocomplete="off"
@@ -63,14 +66,15 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupPassword"
+            <label class="visually-hidden" for="inlineFormInputGroupPasswordRegister"
               >Password</label
             >
             <input
               type="password"
               class="form-control custom-input"
-              id="inlineFormInputGroupPassword"
+              id="inlineFormInputGroupPasswordRegister"
               placeholder="Password"
+              name="passwordRegister"
               [(ngModel)]="register.password"
               autocomplete="off"
               (focus)="resetError('password')"
@@ -85,7 +89,7 @@
           *ngIf="activeTab === 'Login'"
         >
           <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupEmail"
+            <label class="visually-hidden" for="inlineFormInputGroupEmailLogin"
               >Email</label
             >
             <input
@@ -94,7 +98,7 @@
               id="inlineFormInputGroupEmailLogin"
               name="emailLogin"
               placeholder="Email"
-              [(ngModel)]="login.email"
+              [(ngModel)]="loginEmail"
               autocomplete="on"
               (focus)="resetError('email')"
             />
@@ -103,7 +107,7 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupPassword"
+            <label class="visually-hidden" for="inlineFormInputGroupPasswordLogin"
               >Password</label
             >
             <input
@@ -112,7 +116,7 @@
               id="inlineFormInputGroupPasswordLogin"
               name="passwordLogin"
               placeholder="Password"
-              [(ngModel)]="login.password"
+              [(ngModel)]="loginPassword"
               autocomplete="on"
               (focus)="resetError('password')"
             />

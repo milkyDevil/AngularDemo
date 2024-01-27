@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from 'src/app/service/user.service';
+import { ToastService } from 'src/app/service/toast.service';
 import {
   beginRegister,
   registerSuccess,
@@ -18,7 +19,8 @@ export class UserEffect {
   constructor(
     private action$: Actions,
     private service: UserService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   _userregister = createEffect(() =>
@@ -26,20 +28,28 @@ export class UserEffect {
       ofType(beginRegister),
       exhaustMap((action) =>
         this.service.registerApiFn(action.userdata).pipe(
-          map((data) =>
-            registerSuccess({
-              message: 'Registered successfully',
-              resulttype: 'pass',
-            })
-          ),
-          catchError((error) =>
-            of(
+          map((data) => {
+            if (data.status == 'success') {
+              this.toastService.showToast('Registration successful', true);
+              return registerSuccess({ data: data });
+            } else {
+              console.log('ajlkajslaks', data);
+              this.toastService.showToast('Registration fail', false);
+              return registerFailure({ data: data });
+            }
+          }),
+          catchError((error) => {
+            this.toastService.showToast('Registration fail', false);
+            return of(
               registerFailure({
-                message: 'Registration failed due to: ' + error.message,
-                resulttype: 'fail',
+                data: {
+                  status: 'error',
+                  message: error.message,
+                  data: null,
+                },
               })
-            )
-          )
+            );
+          })
         )
       )
     )
@@ -52,12 +62,12 @@ export class UserEffect {
         this.service.loginApiFn(action.userdata).pipe(
           map((data) => {
             if (data.data != null) {
-              console.log("data.data",data.data)
-              this.service.setUserToLocalStore(data.data)
+              console.log('data.data', data.data);
+              this.service.setUserToLocalStore(data.data);
               this.router.navigate(['home']);
               return loginSuccess({ data: data.data });
             } else {
-              alert("Don't have access")
+              alert("Don't have access");
               return loginFailure({
                 data: data,
               });
@@ -67,7 +77,7 @@ export class UserEffect {
             of(
               loginFailure({
                 data: {
-                  status: 'fail',
+                  status: 'error',
                   message: error.message,
                   data: null,
                 },
