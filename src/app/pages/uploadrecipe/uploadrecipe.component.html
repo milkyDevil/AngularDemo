@@ -1,136 +1,199 @@
 <app-headertitle></app-headertitle>
 <div class="mainContainer">
-  <form [formGroup]="recipeForm">
-  <div class="row g-3 align-items-center form-part">
-    <div class="col-12">
-      <label class="recipeImage" for="recipeImage">
-        <div class="image-preview">
-          <img
-            id="previewImage"
-            class="img-fluid"
-            src="assets/images/UploadPreviewImage.png"
-            alt="Recipe Image"
-          />
-          <div class="overlay">
+  <form [formGroup]="recipeForm" (ngSubmit)="UploadRecipe()">
+    <div class="row g-3 align-items-center form-part">
+      <div class="col-12">
+        <label class="recipeImage" for="recipeImage">
+          <div class="image-preview">
+            <img
+              id="previewImage"
+              class="img-fluid"
+              [src]="
+                recipeImageUrl
+                  ? recipeImageUrl
+                  : 'assets/images/UploadPreviewImage.png'
+              "
+              alt="Recipe Image"
+            />
+            <!-- <div class="overlay">
             <span class="bi bi-plus"></span>
+          </div> -->
           </div>
-        </div>
-      </label>
-      <input
+        </label>
+        <!-- <input
         type="file"
         class="form-control visually-hidden"
         id="recipeImage"
         accept="image/*"
-      />
-    </div>
-    <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Recipe Name"
-      />
-    </div>
-
-    <div class="col-12">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input custom-input" type="radio" name="vegNonVeg" id="vegOption" value="Veg">
-        <label class="form-check-label textLabel" for="vegOption">Veg</label>
+      /> -->
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input custom-input" type="radio" name="vegNonVeg" id="nonVegOption" value="Non-Veg">
-        <label class="form-check-label textLabel" for="nonVegOption">Non-Veg</label>
-      </div>
-    </div>
-    
-
-    <div class="col-12">
-      <select class="form-select custom-input textLabel" formControlName="category">
-        <option value="" class="textLabel">Select Category</option>
-        <option class="textLabel" *ngFor="let category of recipeCategories" [value]="category">{{ category }}</option>
-      </select>
-    </div>    
-
-    <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Time (e.g in 30m)"
-      />
-    </div>
-    <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Time (e.g in 30 MIN)"
-      />
-    </div>
-    <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Serving Count (e.g in 2)"
-      />
-    </div>
-    <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Calorie Count (e.g in 23 KCal)"
-      />
-    </div>
-    <div class="col-12 ingredient-input-group">
-      <div class="col-8">
+      <div class="col-12">
         <input
           type="text"
           class="form-control custom-input"
-          placeholder="Ingredient"
+          placeholder="Recipe Name"
+          formControlName="recipeName"
+          (input)="clearError('recipeName')"
+          (focus)="clearError('recipeName')"
         />
-      </div>
-      <div class="col-3">
-        <input
-          type="text"
-          class="form-control custom-input"
-          placeholder="Qty"
-        />
-      </div>
-    </div>
-    <div class="col-12" formArrayName="ingredients">
-      <div class="col-12 ingredient-input-group ingredientdiv" *ngFor="let ingredientGroup of ingredientArray.controls; let i = index" [formGroupName]="i">
-        <div class="col-8">
-          <input type="text" class="form-control custom-input" placeholder="Ingredient" formControlName="ingredient" />
-        </div>
-        <div class="col-3">
-          <input type="text" class="form-control custom-input" placeholder="Qty" formControlName="quantity" />
-        </div>
-        <div class="col-1">
-          <button type="button" class="btn btn-danger" (click)="removeIngredient(i)">x</button>
+        <div *ngIf="isFieldInvalid('recipeName') && submitted">
+          <small class="text-danger">Recipe Name is required</small>
         </div>
       </div>
-    </div>
-     <div class="col-12 ingredient-add-more" (click)="addIngredient()">Add more ingredients</div>
-     <div class="col-12">
-      <input
-        type="text"
-        class="form-control custom-input"
-        placeholder="Directions steps"
-      />
-      </div>
-      <div class="col-12" formArrayName="directionSteps">
-        <div class="col-12 ingredient-input-group" *ngFor="let stepGroup of directionStepArray.controls; let i = index" [formGroupName]="i">
-          <div class="col-10">
-            <input type="text" class="form-control custom-input" placeholder="Direction step" formControlName="step" />
-          </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-danger" (click)="removeDirectionStep(i)">x</button>
-          </div>
+
+      <div class="col-12">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input custom-input"
+            type="radio"
+            formControlName="vegNonVeg"
+            id="vegOption"
+            value="Veg"
+          />
+          <label class="form-check-label textLabel" for="vegOption">Veg</label>
         </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input custom-input"
+            type="radio"
+            formControlName="vegNonVeg"
+            id="nonVegOption"
+            value="NonVeg"
+          />
+          <label class="form-check-label textLabel" for="nonVegOption"
+            >Non-Veg</label
+          >
+        </div>
+      </div>
+
+      <div class="col-12">
+        <select
+          class="form-select custom-input textLabel"
+          formControlName="category"
+          (input)="clearError('category')"
+          (focus)="clearError('category')"
+        >
+          <option value="" class="textLabel">Select Category</option>
+          <ng-container *ngFor="let category of recipeCategories">
+            <option class="textLabel" [value]="category">
+              {{ category }}
+              <span *ngIf="category === recipeForm.get('category')?.value"
+                >(Selected)</span
+              >
+            </option>
+          </ng-container>
+        </select>
+        <div *ngIf="isFieldInvalid('category') && submitted">
+          <small class="text-danger">Category is required</small>
+        </div>
+  
       </div>
       
-      <div class="col-12 ingredient-add-more" (click)="addDirectionStep()">Add more direction steps</div>
-    
-    <div class="col-12 upload-button-div">
-      <button type="button" class="btn btnColor" (click)="navigateToHome()">Upload</button>
+      <div class="col-12">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Time (e.g in 30m)"
+          formControlName="time"
+          (input)="clearError('time')"
+          (focus)="clearError('time')"
+        />
+        <div *ngIf="isFieldInvalid('time') && submitted">
+          <small class="text-danger">Time is required</small>
+        </div>
+  
+      </div>
+      <div class="col-12">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Serving Count (e.g in 2)"
+          formControlName="servingCount"
+          (input)="clearError('servingCount')"
+          (focus)="clearError('servingCount')"
+        />
+        <div *ngIf="isFieldInvalid('servingCount') && submitted">
+          <small class="text-danger">Serving count is required</small>
+        </div>
+      </div>
+      <div class="col-12">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Calorie Count (e.g in 23 KCal)"
+          formControlName="calorieCount"
+          (input)="clearError('calorieCount')"
+          (focus)="clearError('calorieCount')"
+        />
+        <div *ngIf="isFieldInvalid('calorieCount') && submitted">
+          <small class="text-danger">Calorie count is required</small>
+        </div>
+      </div>
+      <div class="col-12" formArrayName="ingredients">
+        <div *ngFor="let ingredientGroup of ingredientArray.controls; let i = index"
+        [formGroupName]="i">
+
+        
+        <div class="col-12 ingredient-input-group ingredientdiv"
+          >
+          <div class="col-8">
+            <input type="text" class="form-control custom-input" placeholder="Ingredient"
+                   formControlName="ingredient"
+                   (input)="clearError('ingredients', i)"
+                   (focus)="clearError('ingredients', i)">
+          </div>
+          <div class="col-3">
+            <input type="text" class="form-control custom-input" placeholder="Qty" formControlName="quantity"
+                   (input)="clearError('ingredients', i)"
+                   (focus)="clearError('ingredients', i)">
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-danger" (click)="removeIngredient(i)">x</button>
+          </div>
+          </div>
+        <div class="col-12">
+          <div *ngIf="submitted && isFieldInvalid('ingredients', i)">
+            <small class="text-danger">Ingredient is required</small>
+          </div>
+        </div>
+      </div>
+        
+
+      </div>
+      <div class="col-12 ingredient-add-more" (click)="addIngredient()">
+        Add more ingredients
+      </div>
+      <div class="col-12" formArrayName="directionSteps">
+        <div *ngFor="let stepGroup of directionStepArray.controls; let i = index"
+        [formGroupName]="i">
+
+        <div
+          class="col-12 ingredient-input-group ingredientdiv"
+        >
+        <div class="col-10">
+          <input type="text" class="form-control custom-input" placeholder="Direction step" formControlName="step" (input)="clearError('directionSteps', i)" (focus)="clearError('directionSteps', i)" />
+        </div>
+        <div class="col-1">
+          <button type="button" class="btn btn-danger" (click)="removeDirectionStep(i)">x</button>
+        </div>
+        </div>
+        <div class="col-12">
+          <div *ngIf="submitted && isFieldInvalid('directionSteps', i)">
+            <small class="text-danger">Directions is required</small>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-12 ingredient-add-more" (click)="addDirectionStep()">
+        Add more direction steps
+      </div>
+
+      <div class="col-12 upload-button-div">
+        <button type="submit" class="btn btnColor" (click)="UploadRecipe()">
+          Upload
+        </button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>

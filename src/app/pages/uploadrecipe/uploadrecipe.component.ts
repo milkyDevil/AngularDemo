@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,6 +31,9 @@ export class UploadrecipeComponent implements OnInit {
     'Pie',
     'Ice Cream',
   ];
+  recipeImageUrl: string = '';
+  selectedCategory: string = '';
+  submitted: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -40,16 +43,121 @@ export class UploadrecipeComponent implements OnInit {
 
   initForm(): void {
     this.recipeForm = this.fb.group({
-      recipeName: ['', Validators.required],
-      vegNonVeg: ['', Validators.required],
-      category: ['', Validators.required],
-      time: ['', Validators.required],
-      servingCount: ['', Validators.required],
-      calorieCount: ['', Validators.required],
+      recipeName: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(2)])),
+      vegNonVeg: this.fb.control('Veg', Validators.required),
+      category: this.fb.control('', Validators.required),
+      time: this.fb.control('', Validators.required),
+      servingCount: this.fb.control('', Validators.required),
+      calorieCount: this.fb.control('', Validators.required),
       ingredients: this.fb.array([this.createIngredient()]),
       directionSteps: this.fb.array([this.createDirectionStep()]),
     });
+
+    this.recipeForm.get('category')?.valueChanges.subscribe((value: string) => {
+      this.selectedCategory = value;
+    });
   }
+
+  isFieldInvalid(field: string, index?: number) {
+    const control = this.recipeForm.get(field);
+
+    if (control instanceof FormArray) {
+      if (index !== undefined) {
+        const group = control.at(index) as FormGroup;
+        return group.invalid;
+      } else {
+        let invalid = false;
+        control.controls.forEach((ingredientGroup: AbstractControl) => {
+          const group = ingredientGroup as FormGroup;
+          if (group.invalid) {
+            invalid = true;
+          }
+        });
+        return invalid;
+      }
+    } else {
+      return control?.invalid;
+    }
+}
+
+clearError(field: string, index?: number) {
+  const control = this.recipeForm.get(field);
+
+  if (control instanceof FormArray) {
+      if (index !== undefined) {
+          const group = control.at(index) as FormGroup;
+          Object.keys(group.controls).forEach(controlName => {
+              const control = group.get(controlName);
+              if (control) {
+                  control.markAsUntouched();
+                  control.setErrors(null); // Reset errors
+              }
+          });
+      } else {
+          control.controls.forEach((ingredientGroup: AbstractControl) => {
+              const group = ingredientGroup as FormGroup;
+              Object.keys(group.controls).forEach(controlName => {
+                  const control = group.get(controlName);
+                  if (control) {
+                      control.markAsUntouched();
+                      control.setErrors(null); // Reset errors
+                  }
+              });
+          });
+      }
+  } else if (control) {
+      control.markAsUntouched();
+      control.setErrors(null); // Reset errors
+  }
+}
+
+checkIngredientsValidity(): boolean {
+  const ingredientsArray = this.recipeForm.get('ingredients') as FormArray;
+  let isValid = true;
+  ingredientsArray.controls.forEach((control: AbstractControl<any>) => {
+      const group = control as FormGroup;
+      if (!group.get('ingredient')?.value || !group.get('quantity')?.value) {
+          isValid = false;
+      }
+  });
+  return isValid;
+}
+
+checkDirectionStepsValidity(): boolean {
+  const directionStepsArray = this.recipeForm.get('directionSteps') as FormArray;
+  let isValid = true;
+  directionStepsArray.controls.forEach((control: AbstractControl<any>) => {
+    const group = control as FormGroup;
+    if (!group.get('step')?.value) {
+      isValid = false;
+    }
+  });
+  return isValid;
+}
+
+
+markAllAsTouched() {
+  Object.keys(this.recipeForm.controls).forEach(field => {
+    const control = this.recipeForm.get(field);
+    if (control instanceof FormArray) {
+      (control as FormArray).controls.forEach((formGroup: AbstractControl) => {
+        if (formGroup instanceof FormGroup) {
+          Object.keys(formGroup.controls).forEach(innerField => {
+            const innerControl = formGroup.get(innerField);
+            innerControl?.markAsTouched();
+            innerControl?.updateValueAndValidity();
+          });
+        }
+      });
+    } else {
+      control?.markAsTouched();
+      control?.updateValueAndValidity();
+    }
+  });
+}
+
+
+
 
   get ingredientArray(): FormArray {
     return this.recipeForm.get('ingredients') as FormArray;
@@ -74,11 +182,35 @@ export class UploadrecipeComponent implements OnInit {
 
   addIngredient(): void {
     this.ingredientArray.push(this.createIngredient());
-  }
+    
+    // Check if there are no existing errors in other fields
+    if (!this.hasIngredientErrors()) {
+        this.clearError('ingredients');
+    }
+}
 
-  addDirectionStep(): void {
-    this.directionStepArray.push(this.createDirectionStep());
+hasIngredientErrors(): boolean {
+    return this.ingredientArray.controls.some((control: AbstractControl) => {
+        return control.get('ingredient')?.invalid || control.get('quantity')?.invalid;
+    });
+}
+
+
+
+addDirectionStep(): void {
+  this.directionStepArray.push(this.createDirectionStep());
+
+  // Check if there are no existing errors in other fields
+  if (!this.hasDirectionStepErrors()) {
+    this.clearError('directionSteps');
   }
+}
+
+hasDirectionStepErrors(): boolean {
+  return this.directionStepArray.controls.some((control: AbstractControl) => {
+    return control.get('step')?.invalid;
+  });
+}
 
   removeIngredient(index: number): void {
     this.ingredientArray.removeAt(index);
@@ -89,15 +221,17 @@ export class UploadrecipeComponent implements OnInit {
   }
   
 
-  navigateToHome(): void {
-    console.log("hdskjdhk",this.recipeForm)
-    if (this.recipeForm.valid) {
-      // You can submit the form here
+  UploadRecipe(): void {
+    this.submitted = true; 
+    console.log("hdskjdhk",this.recipeForm.value)
+    if (this.recipeForm.valid && this.checkIngredientsValidity() && this.checkDirectionStepsValidity()) {
+        // You can submit the form here
       console.log('Form submitted!');
-      this.router.navigate(['/home']);
+      //this.router.navigate(['/home']);
     } else {
       // Handle invalid form
       console.log('Form is invalid. Cannot submit.');
+      this.markAllAsTouched();
     }
   }
 }
