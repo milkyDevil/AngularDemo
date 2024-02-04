@@ -43,7 +43,9 @@ export class UploadrecipeComponent implements OnInit {
 
   initForm(): void {
     this.recipeForm = this.fb.group({
+      recipeImageLink:'',
       recipeName: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(2)])),
+      recipeDescription: this.fb.control('', Validators.required),
       vegNonVeg: this.fb.control('Veg', Validators.required),
       category: this.fb.control('', Validators.required),
       time: this.fb.control('', Validators.required),
@@ -223,7 +225,11 @@ hasDirectionStepErrors(): boolean {
 
   UploadRecipe(): void {
     this.submitted = true; 
-    console.log("hdskjdhk",this.recipeForm.value)
+   
+    let payload : any = this.recipeForm.value
+    payload.userId = 1
+    
+    console.log("payload",payload)
     if (this.recipeForm.valid && this.checkIngredientsValidity() && this.checkDirectionStepsValidity()) {
         // You can submit the form here
       console.log('Form submitted!');

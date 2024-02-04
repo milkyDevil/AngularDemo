@@ -42,6 +42,20 @@
       </div>
 
       <div class="col-12">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="Recipe Short Description (2 lines)"
+          formControlName="recipeDescription"
+          (input)="clearError('recipeDescription')"
+          (focus)="clearError('recipeDescription')"
+        />
+        <div *ngIf="isFieldInvalid('recipeDescription') && submitted">
+          <small class="text-danger">Recipe Short Description is required</small>
+        </div>
+      </div>
+
+      <div class="col-12">
         <div class="form-check form-check-inline">
           <input
             class="form-check-input custom-input"
